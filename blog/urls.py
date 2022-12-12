@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import HomeView
+from .views import PostList
 from . import views
 
-
+app_name = 'blog'
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', HomeView.as_view(), name="home"),
-    path('blog/', include('blog.urls')),
+
+    path('', views.PostList.as_view(), name ='post_list'),
+    path('<int:pk>/', views.PostDetail.as_view(), name= 'post_detail')
 ]

@@ -8,5 +8,9 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True) #add 할 때의 시간
     updated_at = models.DateTimeField(auto_now=True) #update 할 때의 시간
 
-def __str__(self):
-    return f'[{self.pk}]--{self.title}'
+    def __str__(self):
+        return f'[{self.pk}]--{self.title}'
+
+    def get_absolute_url(self):
+        return f'/blog/{self.pk}'
+

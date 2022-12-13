@@ -12,9 +12,11 @@
 {% endblock title %}
 
 {% block main_area %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
 <section class="container">
 
-   
+
     <!-- Page content-->
     <div class="container mt-5">
         <div class="row">
@@ -37,7 +39,8 @@
 
                     <!-- Preview image figure--> <!-- post.id-->
                     {% if post.head_image %}
-                    <img class="card-img-top" style="width: 600px;height: 600px;" src="{{ post.head_image.url }}" alt="..." />
+                    <img class="card-img-top" style="width: 600px;height: 600px;" src="{{ post.head_image.url }}"
+                        alt="..." />
                     {% else %}
                     <img class="card-img-top" src="https://picsum.photos/id/{{post.id}}/800/200" alt="..." />
                     {% endif %}
@@ -45,7 +48,7 @@
             </div>
             </article>
             <!-- Comments section-->
-           
+
             <section class="mb-5">
                 <div class="card bg-light">
                     <div class="card-body">
@@ -97,6 +100,25 @@
                 </div>
             </section>
         </div>
+        {% if post.file_upload %}
+        <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="button" download>
+            Download:
+            {% if post.get_file_ext == 'csv' %}
+            <i class="bi bi-filetype-csv"></i>
+            {% elif post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls' %}
+            <i class="bi bi-filetype-xlsx"></i>
+            {% elif post.get_file_ext == 'docx' or post.get_file_ext == 'doc' %}
+            <i class="bi bi-filetype-docx"></i>
+            {% elif post.get_file_ext == 'pdf' %}
+            <i class="bi bi-filetype-pdf"></i>
+            {% else %}
+            <i class="bi bi-file-earmark-font"></i>
+            {% endif %}
+            {{ post.get_file_name }}
+        </a>
+        {% endif %}
+
+
         <!-- Side widgets-->
         <div class="col-lg-4">
             <!-- Search widget-->

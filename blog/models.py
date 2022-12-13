@@ -7,10 +7,12 @@ class Post(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True) #add 할 때의 시간
     updated_at = models.DateTimeField(auto_now=True) #update 할 때의 시간
-
+    head_image = models.ImageField(upload_to='blog/images/%Y/%M/%D/',blank=True)
     def __str__(self):
         return f'[{self.pk}]--{self.title}'
 
     def get_absolute_url(self):
         return f'/blog/{self.pk}'
+
+
 

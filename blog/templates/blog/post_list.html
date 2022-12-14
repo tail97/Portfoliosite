@@ -16,17 +16,19 @@ Blog 목록
 
 <!-- Page content-->
 <section class="container">
-    <h2>Blog{% if category %}<span class="badge bg-secondary" >{{ category }}</span>{% endif %}</h2>
+    <h2>Blog
+        {% if category %}<span class="badge bg-secondary">{{ category }}</span>{% endif %}
+        {% if tag %}<span class="badge bg-secondary">{{ tag }}</span>{% endif %}
+    </h2>
     <div class="row">
         <!-- Blog entries-->
         <div class="col-lg-8">
             {% if post_list.exists %}
             <!-- 게시물이 존재한다면 출력 -->
             
-                <!-- Featured blog post-->
+                <!-- blog post-->
                 {% for p in post_list %}
                 <div class="card mb-4">
-
                     <a href="#!"><img class="card-img-top" src="https://picsum.photos/seed/{{p.id}}/800/200"
                             alt="..." /></a>
                     <div class="card-body">
@@ -36,7 +38,15 @@ Blog 목록
                         <h5 class="text-muted">{{ post.hook_text }}</h5>
                         {% endif %}
                         <p class="card-text">{{ p.content | truncatewords:45}}</p>
-                        <a class="btn btn-primary" href="{{ p.get_absolute_url }}">Read more →</a>
+
+                        {% if p.tags.exists %}
+                            <i class="fas fa-tags"></i>
+                            {% for tag in p.tags.iterator %}
+                                <a href="{{ tag.get_absolute_url }}"><span class=" badge badge-pill bg-light">{{ tag }}</span></a>
+                            {% endfor %}
+                        {% endif %}
+
+                        <a class="btn btn-primary" href="{{ p.get_absolute_url }}">Read more &rarr; →</a>
                     </div>
                 </div>
                 {% endfor %}

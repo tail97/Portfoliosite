@@ -25,8 +25,9 @@
                 <article class="mb-3">
                     <!-- Post header-->
                     <header class="mb-4">
+                        {% if category %}<span class="badge bg-secondary" >{{ category }}</span>{% endif %}
                         <!-- Post title-->
-                        <h1 class="fw-bolder mb-1">Blog - {{ post.title }}</h1>
+                        <h1 class="fw-bolder mb-1">Blog-{{ post.title }}</h1>
                         {% if post.hook_text %}
                         <!-- 서브 제목 -->
                             <h5 class="text-muted">{{ post.hook_text }}</h5>

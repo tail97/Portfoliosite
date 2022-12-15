@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render ,redirect
 from django.views.generic import ListView ,DetailView, CreateView
 from .models import Post, Category, Tag
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 #ListView은 데이터를 전체를 보여주는 기능
@@ -34,9 +35,17 @@ class PostList(ListView):
         context['no_category_post_count'] = Post.objects.filter(category=None).count()
         return context
 
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin ,CreateView):
     model = Post
     fields = ['title','hook_text','content','head_image','file_upload','category']
+
+    def form_valid(self, form):
+        current_user = self.request.user
+        if current_user.is_authenticated and (current_user.is_staff or current_user.is_superuser) :
+            form.instance.author = current_user
+            return super(PostCreate,self).form_valid(form)
+        else:
+            return redirect('/blog/')
 
 def category_page(request, slug):
 

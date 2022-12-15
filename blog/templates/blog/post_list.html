@@ -13,9 +13,15 @@ Blog 목록
 
 {% block main_area %}
 
-
 <!-- Page content-->
 <section class="container">
+    
+    {% if user.is_authenticated %}
+        {% if user.is_superuser or user.is_staff %}
+            <a class= "bnt btn-info btn-sm float-right" href="/blog/create_post/" role="button"><i class="fas fa=pen"></i>&nbsp;new Post&nbsp;</a>
+        {% endif %}
+    {% endif %}    
+    
     <h2>Blog
         {% if category %}<span class="badge bg-secondary">{{ category }}</span>{% endif %}
         {% if tag %}<span class="badge bg-secondary">{{ tag }}</span>{% endif %}

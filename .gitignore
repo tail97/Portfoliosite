@@ -133,3 +133,4 @@ env_info.py
 # /은 폴더를 의미
 migrations/
 _media/
+생각노트/

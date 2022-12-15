@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_title %}Create Post - Blog{% endblock %}
+
+
+{% block my_style %}
+<link href="{% static 'css/my_styles.css' %}" rel="stylesheet" />
+{% endblock my_style %}
+
+{%load crispy_forms_tags%}
+
+	<button type="submit"></button>
+</form>
+
+{% block main_area %}
+
+    <section class="container">
+        <h1> Edit Post </h1>
+        <hr/>
+        <form method="post" enctype="multiport/form-data">{% csrf_token %}
+            <table>
+                {{ form | crispy }}
+                <tr>
+                    <th><label for= "id_tags_str">Tag:</label></th>
+                    <td><input type="text" name="tags_str" id="id_tags_str" value="{{ tag_str_default }}"></td>
+                </tr>
+            </table>
+        <div id="div_id_tags_str">
+            <label for="id_tags_str">Tags </label>
+            <input type="text" name="tags_str" id="id_tags_str" class="textInput form-control" >
+        </div>
+        <button type="submit" class="btn btn-primary float-end mt-3">Submit</button>
+        </form>
+    </section>
+{% endblock %}

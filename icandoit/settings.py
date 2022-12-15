@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 # import env_info == 생성
 import env_info
+from django.conf import settings
+from django.conf.urls.static import static
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,7 +42,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
-   
+    'crispy_forms',
+    'crispy_bootstrap5',
+    'django_summernote',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'django.contrib.sites',
     
 ]
 
@@ -132,3 +141,41 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #이미지 폴더 지정하기
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'_media')
+
+# crispy_forms 환경 설정 값
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# summernote_theme
+SUMMERNOTE_THEME = 'bs5'
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1
+
+ACCOUNT_EMAIL_REQUIED = True
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+#로그인했을때 포스트 목록페이지로 바로
+LOGIN_REDIRECT_URL = '/blog/'
+
+# Provider specific settings
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         # For each OAuth based provider, either add a ``SocialApp``
+#         # (``socialaccount`` app) containing the required client
+#         # credentials, or list them here:
+#         'APP': {
+#             'client_id': '123',
+#             'secret': '456',
+#             'key': ''
+#         }
+#     }
+# }

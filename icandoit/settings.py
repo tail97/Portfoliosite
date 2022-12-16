@@ -41,15 +41,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #앱
     'blog',
+    'ml_deploy',
+    #html
     'crispy_forms',
     'crispy_bootstrap5',
     'django_summernote',
+    #goolge인증
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'django.contrib.sites',
+
     
 ]
 

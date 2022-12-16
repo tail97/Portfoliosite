@@ -27,6 +27,7 @@ urlpatterns = [
     path('', HomeView.as_view(), name="home"),
     path('blog/', include('blog.urls')),
     #account
-    path('accounts/', include('allauth.urls'))
+    path('accounts/', include('allauth.urls')),
+    path('ml_deploy/', include('ml_deploy.urls')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

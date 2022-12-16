@@ -19,6 +19,7 @@ from .views import PostList
 from . import views
 
 app_name = 'blog'
+
 urlpatterns = [
     
     path('update_post/<int:pk>', views.PostUpdate.as_view()),
@@ -27,5 +28,6 @@ urlpatterns = [
     path('category/<str:slug>/', views.category_page),
     path('', views.PostList.as_view(), name ='post_list'),
     path('<int:pk>/', views.PostDetail.as_view(), name= 'post_detail'),
+    
     
 ]
